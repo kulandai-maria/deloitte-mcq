@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+    <title>Deloittee Interview Question</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+<body >
+    <div class="container-fluid">
+        
+        <div class="question-wrap">
+            <div class="quest-left">
+                <div class="quest-label">Question</div>
+                <div class="quest-no"><strong>01/02</strong></div>
+            </div>
+            <div class="quest-right">
+                <div class="quest-type">
+                    <p>Below are three options on how to respond to the scenario above. Image question the client side pings you and tells that they have a personal emergency and will need to be away from work.</p>
+                    <p>You will...</p>
+                </div>
+                <p class="quest-note">Below are three options on how to respond to the scenario above.Please choose the response that resonates most with you and click <span class="fw-b">Next</span> to proceed</p>
+            </div>
+        </div>
+        <div id="demo"></div>
+        <!-- <button onclick="loadXMLDoc()">test</button> -->
+        <div class="row text-center ans-lists-wrap justify-content-center">
+            <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="ans-list">
+                    <input type="checkbox" id="cb1" />
+                    <label for="cb1"><img src="./imgs/iron-man.jpg" alt="Iron Man" /></label>
+                </div>              
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="ans-list">
+                    <input type="checkbox" id="cb2" />
+                    <label for="cb2"><img src="./imgs/complex_eLearning.png" alt="complex_eLearning" /></label>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="ans-list">
+                    <input type="checkbox" id="cb3" />
+                    <label for="cb3"><img src="./imgs/eLearning.png" alt="eLearning" /></label>
+                </div>
+            </div>  
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  align-self-center">
+                <div class="ans-list">
+                    <input type="checkbox" id="cb4" />
+                    <label for="cb4"><img src="./imgs/medium-complexity.png" alt="medium-complexity" /></label>
+                </div>
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-30 mb-10">
+                <button class="btn btn-primary"data-toggle="modal" data-target="#myModal" disabled>Submit</button>
+            </div>
+        </div>
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="success-wrap text-center">
+                            <div class="success-img">
+                                <img src="./imgs/check.png" alt="Checked">
+                            </div>
+                            <h3>Thanks for your valuable<br>feedback.</h3>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+document.addEventListener( 'DOMContentLoaded' , () => {
+    let url = "mcqlist.xml";
+    fetch(url).then(response=>response.text()).then(
+        data=>{
+            // console.log(data);
+            let parser = new DOMParser();
+            let xml = parser.parseFromString(data,'application/xml');
+          //  document.getElementById('demo').textContent = data;
+            getMcqData(xml);
+        });
+})
+
+function getMcqData(x) {
+    var list = document.getElementById('MCQS');
+    var mcqdata = x.getElementsByTagName('VALUE');
+    //console.log(mcqdata);
+    var html = '';
+    for ( var i =0; i<mcqdata.length;i++) {
+        // console.log(mcqdata[i]);
+        if(typeof mcqdata[i] !== typeof undefined) {
+
+            var mcqvalue = mcqdata[i].firstChild.nodeValue;
+           var mcqimgname = mcqdata[i].getAttribute('imgname');
+
+            html +='<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">'
+                html +='<div class="ans-list">'
+                    html +='<input type="checkbox" class="checkbox_check" id="cb'+i+'" value="'+mcqvalue+'" />'
+                    html +='<label for="cb'+i+'"><img src="'+mcqimgname+'" alt="'+mcqvalue+'" /></label>'
+                html +='</div>'             
+            html +='</div>'
+        }
+    }
+    $('.ans-lists-wrap').html(html);
+    $('input[type="checkbox"]').click(function(){
+        if($(this).is(":checked")){
+            // alert("Checkbox is checked.");
+            $('.btn-primary').removeAttr('disabled','false');
+        }
+        else if($(this).is(":not(:checked)")){
+            // alert("Checkbox is unchecked.");
+            $('.btn-primary').attr('disabled','true');
+        }
+    });
+}
+
+</script>
+</html>

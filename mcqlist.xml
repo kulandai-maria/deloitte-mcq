@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+<MCQLIST>
+    <MCQS>
+        <VALUE imgname="./imgs/iron-man.jpg">Iron man</VALUE>
+        <!-- <IMGNAME>./imgs/iron-man.jpg</IMGNAME> -->
+    </MCQS>
+    <MCQS>
+        <VALUE imgname="./imgs/complex_eLearning.png">Complex eLearning</VALUE>
+    </MCQS>
+      <MCQS>
+        <VALUE imgname="./imgs/eLearning.png">eLearning</VALUE>
+    </MCQS>
+      <MCQS>
+        <VALUE imgname="./imgs/medium-complexity.png">Medium Complexity</VALUE>
+    </MCQS>
+</MCQLIST>
+</root>
